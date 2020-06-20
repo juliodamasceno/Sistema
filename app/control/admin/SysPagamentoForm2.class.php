@@ -31,7 +31,7 @@ class SysPagamentoForm extends TPage
         $this->form->setFormTitle('<h4>Cadastro de Pagamentos</h4>');
         $this->form->setProperty('style', 'margin:0;border:0');
         $this->form->setClientValidation(true);
-        set
+        
         // master fields
         $id          = new TEntry('id');
         $date        = new TDate('date');
@@ -148,6 +148,7 @@ class SysPagamentoForm extends TPage
         $col_id->setVisibility(false);
         $col_uniq->setVisibility(false);
         
+        $ = new TLabel('');
         // creates two datagrid actions
         $action1 = new TDataGridAction([$this, 'onEditItemProduto'] );
         $action1->setFields( ['uniqid', '*'] );

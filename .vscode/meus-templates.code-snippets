@@ -1,92 +1,284 @@
 {
-	// Place your Sistema workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
-	// Placeholders with the same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"scope": "javascript,typescript",
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-
-	"Adiciona um componente TLabel" : {
+	"Incluir $this-> ": {
+		"scope": "PHP,php",
+		"prefix": "this.",
+		"body": ["$this->$1"],
+		"description": "Adicionar $this->"
+	},
+	
+	// Adianti Components 
+	"new TLabel ": {
 		"scope": "PHP,php",
 		"prefix": "newTLabel",
 		"body": ["$$1 = new TLabel('$2');"],
 		"description": "Adicionar TLabel"
 	},
-
-	"Adiciona um componente TEntry" : {
+	"new TEntry ": {
 		"scope": "PHP,php",
 		"prefix": "newTEntry",
-		"body": ["$$1 = new TEntry('$2');"],
+		"body": ["$$1 = new TEntry('$1');"],
 		"description": "Adicionar TEntry"
 	},
-
-	"Adiciona um componente TDate" : {
+	"TNumeric ": {
 		"scope": "PHP,php",
-		"prefix": "newTDate",
-		"body": ["$$1 = new TDate('$2');"],
-		"description": "Adicionar TDate"
+		"prefix": "newTNumeric",
+		"body": ["$$1 = new TNumeric('$1', 2, ',', '.', true);"],
+		"description": "New TNumeric"
+	},
+	"TDBUniqueSearch ": {
+		"scope": "PHP,php",
+		"prefix": "newTDBUniqueSearch",
+		"body": ["$$1 = new TDBUniqueSearch('$$1[]', BD, '$2', 'id', '$3');"],
+		"description": "New TDBUniqueSearch"
 	},
 
-	"Adiciona um componente BootstrapFormBuilder" : {
+	// Containers
+	"TVBox ": {
 		"scope": "PHP,php",
-		"prefix": "newBootstrapFormBuilder",
-		"body": ["$$this->form = new BootstrapFormBuilder('$1');"],
-		"description": "Adicionar BootstrapFormBuilder"
+		"prefix": "newTVBox",
+		"body": ["$$1 = new TVBox;",
+				 "$$1->style = 'width: 100%';",
+				 "$$1->add( $$2);"],
+		"description": "New TVBox"
+	},
+	"THBox ": {
+		"scope": "PHP,php",
+		"prefix": "newTHBox",
+		"body": ["$$1 = new THBox;",
+				 "$$1->style = 'width: 100%';",
+				 "$$1->add( $$2);"],
+		"description": "New TVBox"
 	},
 
-	"Adiciona um componente TDate" : {
+	// TSession
+	"TSession Get ": {
 		"scope": "PHP,php",
-		"prefix": "newTDate",
-		"body": ["$$1 = new TDate('$2');"],
-		"description": "Adicionar TDate"
+		"prefix": "getTSession",
+		"body": ["$$1 = TSession::getValue('$2');"],
+		"description": "Session Get"
+	},
+	"TSession Set ": {
+		"scope": "PHP,php",
+		"prefix": "setTSession",
+		"body": ["TSession::setValue('$1', $$2);"],
+		"description": "Session Get"
 	},
 
-	"Adiciona um componente setFormTitle" : {
+	// Transaction
+	"TTransaction Open/Close ": {
 		"scope": "PHP,php",
-		"prefix": "setFormTitle",
-		"body": ["$$this->form->setFormTitle('$1');"],
-		"description": "Adicionar setFormTitle"
+		"prefix": "newTTransaction",
+		"body": ["TTransaction::open($1);",
+				 "$2",	
+				 "TTransaction::close();"],
+		"description": "TTransaction Open/Close"
 	},
-
-	"Adiciona um componente setProperty" : {
+	"TTransaction Open/Close Try Exception ": {
 		"scope": "PHP,php",
-		"prefix": "setProperty",
-		"body": ["$$this->form->setProperty('$1');"],
-		"description": "Adicionar setProperty"
-	},
+		"prefix": "newTryTransaction",
+		"body": [
+			"try",
+			"{",
+			"    TTransaction::open($1);",
+			"    $2",
+			"    TTransaction::close();",
+			"}",
+			"catch (Exception $$e)",
+			"{",
+			"    new TMessage('error', $$e->getMessage());",
+			"}"],
+			"description": "Session Get"
+		},
 
-	"Adiciona um componente TText" : {
-		"scope": "PHP,php",
-		"prefix": "newTText",
-		"body": ["$$1 = new TText('$2');"],
-		"description": "Adicionar TText"
-	},
+		// Actions
+		"TAction ": {
+			"scope": "PHP,php",
+			"prefix": "newTAction",
+			"body": ["$$1 = new TAction([$$this, '$2'], ['register_state' => 'false']);"],
+			"description": "New TAction"
+		},
+		"TActionLink ": {
+			"scope": "PHP,php",
+			"prefix": "newTActionLink",
+			"body": ["$$1 = new TAction([$$this, '$2'], ['register_state' => 'false']);",
+					 "$$3 = new TActionLink('$4', $$1, '', null, null, 'far:check-circle green');"],
+			"description": "New TActionLink"
+		},
+		"TCriteria ": {
+			"scope": "PHP,php",
+			"prefix": "newTCriteria",
+			"body": ["$$1 = new TCriteria; ",
+					"$$1->add(new TFilter('$2', '=', $3)); "],
+			"description": "New TCriteria"
+		},
 
-	"Adiciona um componente addvalidation" : {
-		"scope": "PHP,php",
-		"prefix": "addvalidation",
-		"body": ["$$1->addValidation('$2', new TRequiredValidator);"],
-		"description": "Adicionar addvalidation"
-	},
+		// Page
+		"TPage ": {
+			"scope": "PHP,php",
+			"prefix": "newTPage",
+			"body": ["class $1 extends TPage",
+					"{ ",
+					"   ",
+					"   function construct()",
+					"   {",
+					"       parent::__construct();",
+					" ",
+					"       $2",
+					"   }",
+					"}"],
+			"description": "New TPage"
+		},
+		
+		// Forms
+		"TBootstrapFormBuilder ": {
+			"scope": "PHP,php",
+			"prefix": "newBootstrapFormBuilder",
+			"body": ["class $1 extends TPage",
+ 					 "{ ",
+					 "    private $$form;   ",
+					 " ",
+					 "    function construct()",
+					 "    {",
+					 "        parent::__construct();",
+					 " ",
+					 "        $$this->form = new BootstrapFormBuilder('form_$1');",
+					 "        $$this->form->setFormTitle('$1 $2');",
+					 "        $$this->form->setFieldSizes('100%');",
+					 "        $$this->form->generateAria();",
+					 " ",
+					 "        $3",
+					 " ",
+					 "        $$vbox        = new TVBox;",
+					 "        $$vbox->style = 'width: 100%';",
+					 "        $$vbox->add($this->form); ",
+					 "        parent::add($vbox);",
+					 " ",
+					 "    }",
+					 "}"],
+			"description": "New BootstrapFormBuilder"
+		},
 
-	"Adiciona um componente TDataGridAction" : {
-		"scope": "PHP,php",
-		"prefix": "TDataGridAction",
-		"body": ["$$1 = new TDataGridAction([$this,'$2']);"],
-		"description": "Adicionar TDataGridAction"
-	},
+		// Forms Methods 
+		"Form onSave ": {
+			"scope": "PHP,php",
+			"prefix": "newOnSaveMethod",
+			"body": [
+				"public function onSave( $$param )",
+				"{",
+				"    try",
+				"    {",
+				"        TTransaction::open($1); ",
+				" ",						
+				"        $$this->form->validate(); ",
+				"        $$data = $$this->form->getData(); ",
+				" ",		
+				"        $$object = new $2; " ,
+				"        $$object->fromArray( (array) $$data);" ,
+				"        $$object->store();   ",          
+				" ",		
+				"        $$data->id = $$object->id;",
+				" ",		
+				"        $$this->form->setData($$data);",
+				"        TTransaction::close(); ",
+				" ",		
+				"        new TMessage('info', AdiantiCoreTranslator::translate('Record saved'));",
+				"    }",
+				"    catch (Exception $$e) ",
+				"    {",
+				"        new TMessage('error', $$e->getMessage());" ,
+				"        $this->form->setData( $$this->form->getData() );" ,
+				"        TTransaction::rollback(); ",
+				"    }",
+				"}"
+			],
+			"description": "onSave Method"
+		},		
 
-
-
+		// Forms Methods 
+		"Form onEdit ": {
+			"scope": "PHP,php",
+			"prefix": "newOnEditMethod",
+			"body": [
+				"public function onEdit( $$param )",
+				"{",
+				"    try",
+				"    {",
+				"        if (isset($$param['key']))",
+				"        {",
+				"            $$key = $$param['key'];  ",
+				"            TTransaction::open($1); ",
+				"            $$object = new $2($$key);",
+				"            $$this->form->setData($$object); ",
+				"            TTransaction::close(); ",
+				"        }",
+				"        else",
+				"        {",
+				"            $$this->form->clear(TRUE);",
+				"        }",
+				"    }",
+				"    catch (Exception $$e) ",
+				"    {",
+				"        new TMessage('error', $$e->getMessage());" ,
+				"        TTransaction::rollback(); ",
+				"    }",
+				"}"
+			],
+			"description": "onEdit Method"
+		},	
+		
+		// Models
+		"Create Class": {
+			"scope": "PHP,php",
+			"prefix": "newClass",
+			"body": [
+			   "<?php",
+			   "class $1 extends TRecord",
+			   "{",
+			   "    const TABLENAME = '$2';",
+			   "    const PRIMARYKEY= 'id';",
+			   "    const IDPOLICY =  'max'; // {max, serial}",
+			   " ",	
+			   "    public function __construct($$id = NULL, $$callObjectLoad = TRUE)",
+			   "    {",
+			   "        parent::__construct($$id, $callObjectLoad);",
+			   "        parent::addAttribute('$3');",
+			   "    }",
+			   " ",
+			   "}",
+			],
+			"description": "Create Model Adianti Framework"
+		},
+		"Lazy load": {
+			"prefix": "newLazyLoad",
+			"body": [
+				"public function get_$1()",
+				"{",
+				"    return $2::find($this->$3);",
+				"}", 		],
+			"description": "Create Lazy Load Adianti Framework"
+		},
+		"Script Javascript para Navegar com ENTER": {
+	 	"scope": "PHP,php",
+	 	"prefix": "newTSCript_ENTER",
+	 	"body": [ 
+			"TScript::create(\"$('body').on('keydown', 'input, select, textarea', function (e) {",
+			"                    var self = $(this),",
+			"                        form = self.parents('form:eq(0)'),",
+			"                     focusable, next;",
+			"    ",
+			"                    if (e.keyCode == 13) {",
+			"                        focusable = form.find('input,a,select,button,textarea').filter(':visible');",
+			"                        next = focusable.eq(focusable.index(this) + 1);",
+			"                        if (next.length) {",
+			"                            next.focus();",
+			"                        } else {",
+			"                            form.submit();",
+			"                        }",
+			"                    return false;",
+			"                    }",
+			"                 }\");"
+		],
+	 	"description": "Adiciona um TScript com função para navegar com ENTER até o último controle do Form"
+	 }
 
 }
