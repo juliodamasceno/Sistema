@@ -1,9 +1,9 @@
 <?php
 /**
- * SysempenhoForm Form
+ * SysfonteForm Form
  * @author  <your name here>
  */
-class SysempenhoForm extends TPage
+class SysfonteForm extends TPage
 {
     protected $form; // form
     
@@ -17,42 +17,33 @@ class SysempenhoForm extends TPage
         
         
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_Sysempenho');
-        $this->form->setFormTitle('Cadastro de Empenho');
-        $this->form->setFieldSizes('100%');
+        $this->form = new BootstrapFormBuilder('form_Sysfonte');
+        $this->form->setFormTitle('Cadastro da Fonte de Recurso');
+        
 
         // create the form fields
-        $idempenho = new TEntry('idempenho');
-        $numempenho = new TEntry('numempenho');
-        $objeto = new TEntry('objeto');
-        $valor = new TEntry('valor');
-        $dataemp = new TDate('dataemp');
-        $ProcOrigem = new TEntry('procorigem');
-        $Equipamento = new TEntry('equipamento');
+        $idfonte = new TEntry('idfonte');
+        $fonte = new TEntry('fonte');
+        $fontedec = new TEntry('fontedec');
+
 
         // add the fields
-        $this->form->addFields( [ new TLabel('Código'), $idempenho ] );
-        $this->form->addFields( [ new TLabel('Numero do empenho'), $numempenho ] );
-        $this->form->addFields( [ new TLabel('Objeto'), $objeto ] );
-        $this->form->addFields( [ new TLabel('Valor'), $valor ] );
-        $this->form->addFields( [ new TLabel('Data do Empenho'), $dataemp ] );
-        $this->form->addFields( [ new TLabel('Procorigem'), $ProcOrigem ] );
-        $this->form->addFields( [ new TLabel('Equipamento atendido'), $Equipamento ] );
+        $this->form->addFields( [ new TLabel('Código') ], [ $idfonte ] );
+        $this->form->addFields( [ new TLabel('Fonte') ], [ $fonte ] );
+        $this->form->addFields( [ new TLabel('Descrição') ], [ $fontedec ] );
+
 
 
         // set sizes
-        $idempenho->setSize('100%');
-        $numempenho->setSize('100%');
-        $objeto->setSize('100%');
-        $valor->setSize('100%');
-        $dataemp->setSize('100%');
-        $ProcOrigem->setSize('100%');
-        $Equipamento->setSize('100%');
+        $idfonte->setSize('100%');
+        $fonte->setSize('100%');
+        $fontedec->setSize('100%');
 
 
-        if (!empty($idempenho))
+
+        if (!empty($idfonte))
         {
-            $idempenho->setEditable(FALSE);
+            $idfonte->setEditable(FALSE);
         }
         
         /** samples
@@ -64,8 +55,7 @@ class SysempenhoForm extends TPage
         $btn = $this->form->addAction(_t('Save'), new TAction([$this, 'onSave']), 'fa:save');
         $btn->class = 'btn btn-sm btn-primary';
         $this->form->addActionLink(_t('New'),  new TAction([$this, 'onEdit']), 'fa:eraser red');
-        $this->form->addActionLink(_t('Back to the listing'), new TAction(array('SysempenhoList','onReload')), 'fa:table blue');
-           
+        
         // vertical box container
         $container = new TVBox;
         $container->style = 'width: 100%';
@@ -94,12 +84,12 @@ class SysempenhoForm extends TPage
             $this->form->validate(); // validate form data
             $data = $this->form->getData(); // get form data as array
             
-            $object = new Sysempenho;  // create an empty object
+            $object = new Sysfonte;  // create an empty object
             $object->fromArray( (array) $data); // load the object with data
             $object->store(); // save the object
             
-            // get the generated idempenho
-            $data->idempenho = $object->idempenho;
+            // get the generated idfonte
+            $data->idfonte = $object->idfonte;
             
             $this->form->setData($data); // fill form data
             TTransaction::close(); // close the transaction
@@ -135,7 +125,7 @@ class SysempenhoForm extends TPage
             {
                 $key = $param['key'];  // get the parameter $key
                 TTransaction::open('sistema'); // open a transaction
-                $object = new Sysempenho($key); // instantiates the Active Record
+                $object = new Sysfonte($key); // instantiates the Active Record
                 $this->form->setData($object); // fill the form
                 TTransaction::close(); // close the transaction
             }

@@ -3,7 +3,7 @@
  * SystemFornecedorForm Form
  * @author  <your name here>
  */
-class FornecedorForm extends TWindow
+class FornecedorForm extends TPage
 {
        protected $form; // form
         

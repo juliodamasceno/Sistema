@@ -1,39 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
-  <menuitem label="Sistema">
-    <icon>fas:archive fa-fw</icon>
+  <menuitem label="Administrativo">
+    <action>AdministraCentral</action>
+    <icon>fas:sign-out-alt fa-fw</icon>
+  </menuitem>
+  <menuitem label="Segurança">
+    <icon>fas:sign-out-alt fa-fw</icon>
     <menu>
       <menuitem label="Principal">
         <action>AdministraCentral</action>
-        <icon>fas:chalkboard fa-fw #ffffff</icon>
+        <icon>fas:address-book fa-fw #ffffff</icon>
       </menuitem>
-      <menuitem label="Cadastrar Fornecedor">
-        <action>FornecedorForm</action>
-        <icon>fas:address-card fa-fw #894848</icon>
+    </menu>
+  </menuitem>
+  <menuitem label="Cadastrar">
+    <icon>fas:address-book fa-fw</icon>
+    <menu>
+      <menuitem label="1 - Banco">
+        <action>SysBancoForm</action>
       </menuitem>
-      <menuitem label="Cadastrar Empenho">
+      <menuitem label="2 - Empenho">
         <action>SysempenhoCad</action>
-        <icon>fas:archive fa-fw</icon>
       </menuitem>
-      <menuitem label="Cadastrar Pagamento">
+      <menuitem label="3 - Fonte">
+        <action>SysfonteForm</action>
+      </menuitem>
+      <menuitem label="4 - Fornecedor">
+        <action>FornecedorForm</action>
+      </menuitem>
+      <menuitem label="5 - Pagamento">
         <action>SysPagamentoForm</action>
-        <icon>fas:address-card fa-fw</icon>
       </menuitem>
       <menuitem label="Lista Fornecedor">
         <action>SysFornecedorList</action>
-      </menuitem>
-      <menuitem label="Lista de Empenhos">
-        <action>SysempenhoList</action>
+        <icon>fas:address-card fa-fw</icon>
       </menuitem>
       <menuitem label="Listar Empenhos">
         <action>SysempenhoSelectionList</action>
         <icon>fas:archive fa-fw</icon>
+      </menuitem>
+      <menuitem label="Listagem de empenhos">
+        <action>SysempenhoList</action>
+        <icon>fas:american-sign-language-interpreting fa-fw</icon>
       </menuitem>
     </menu>
   </menuitem>
   <menuitem label="Page View">
     <action>SidePageView</action>
     <icon>fas:ad fa-fw</icon>
+  </menuitem>
+  <menuitem label="Lista de Fonte">
+    <action>SysfonteList</action>
+    <icon>fas:american-sign-language-interpreting fa-fw</icon>
   </menuitem>
   <menuitem label="_t{Administration}">
     <icon>fas:home fa-fw</icon>
@@ -110,7 +128,7 @@
       </menuitem>
       <menuitem label="_t{Access Log}">
         <action>SystemAccessLogList</action>
-        <icon>fas:key fa-fw</icon>
+        <icon>fas:address-book fa-fw</icon>
       </menuitem>
       <menuitem label="_t{Change Log}">
         <action>SystemChangeLogView</action>

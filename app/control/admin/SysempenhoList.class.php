@@ -19,6 +19,10 @@ class SysempenhoList extends TPage
     public function __construct()
     {
         parent::__construct();
+       // parent::setSize(0.7, null);
+        //parent::removePadding();
+        //parent::removeTitleBar();
+        //parent::disableEscape();
         
         $this->setDatabase('sistema');            // defines the database
         $this->setActiveRecord('Sysempenho');   // defines the active record
@@ -89,8 +93,8 @@ class SysempenhoList extends TPage
         $column_valor = new TDataGridColumn('valor', 'Valor', 'left');
         $column_dataemp = new TDataGridColumn('dataemp', 'Data do empenho', 'left');
         $column_ProcOrigem = new TDataGridColumn('procorigem', 'Processo', 'left');
-        $column_Equipamento = new TDataGridColumn('equipamento', 'Equipamento', 'left');
-
+        $column_Equipamento = new TDataGridColumn('sysequipamento->sigla', 'Equipamento', 'left');
+        $column_Fonte = new TDataGridColumn('fonte', 'Fonte de recurso', 'left');
 
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_idempenho);
@@ -100,7 +104,7 @@ class SysempenhoList extends TPage
         $this->datagrid->addColumn($column_dataemp);
         $this->datagrid->addColumn($column_ProcOrigem);
         $this->datagrid->addColumn($column_Equipamento);
-
+        $this->datagrid->addColumn($column_Fonte);
         
         $action1 = new TDataGridAction(['SysempenhoForm', 'onEdit'], ['idempenho'=>'{idempenho}']);
         $action2 = new TDataGridAction([$this, 'onDelete'], ['idempenho'=>'{idempenho}']);

@@ -5,7 +5,7 @@
  */
 class SysEmpenho extends TRecord
 {
-    const TABLENAME = 'sys_empenho';
+    const TABLENAME = 'sysempenho';
     const PRIMARYKEY= 'idempenho';
     const IDPOLICY =  'max'; // {max, serial}
     
@@ -23,7 +23,7 @@ class SysEmpenho extends TRecord
         parent::addAttribute('valor');
         parent::addAttribute('dataemp');
         parent::addAttribute('procorigem');
-        parent::addAttribute('equipamento');
+        parent::addAttribute('idequipamento');
         parent::addAttribute('fonte');
     }
 
@@ -33,10 +33,10 @@ class SysEmpenho extends TRecord
      * Sample of usage: $sys_empenho->sys_equipamento = $object;
      * @param $object Instance of SysEquipamento
      */
-    public function set_sys_equipamento(SysEquipamento $object)
+    public function set_sysequipamento(SysEquipamento $object)
     {
-        $this->sys_equipamento = $object;
-        $this->sys_equipamento_id = $object->id;
+        $this->sysequipamento = $object;
+        $this->idequipamento = $object->id;
     }
     
     /**
@@ -44,14 +44,41 @@ class SysEmpenho extends TRecord
      * Sample of usage: $sys_empenho->sys_equipamento->attribute;
      * @returns SysEquipamento instance
      */
-    public function get_sys_equipamento()
+    public function get_sysequipamento()
     {
         // loads the associated object
-        if (empty($this->sys_equipamento))
-            $this->sys_equipamento = new SysEquipamento($this->sys_equipamento_id);
+        if (empty($this->sysequipamento))
+            $this->sysequipamento = new SysEquipamento($this->idequipamento);
     
         // returns the associated object
-        return $this->sys_equipamento;
+        return $this->sysequipamento;
+    }
+    
+    
+    /**
+     * Method set_sys_fonte
+     * Sample of usage: $sys_empenho->sys_equipamento = $object;
+     * @param $object Instance of SysEquipamento
+     */
+    public function set_sysfonte(SysFonte $object)
+    {
+        $this->sysfonte = $object;
+        $this->idfonte = $object->id;
+    }
+    
+    /**
+     * Method get_sys_equipamento
+     * Sample of usage: $sys_empenho->sys_equipamento->attribute;
+     * @returns SysEquipamento instance
+     */
+    public function get_sysfonte()
+    {
+        // loads the associated object
+        if (empty($this->sysfonte))
+            $this->sysfonte = new SysFonte($this->idfonte);
+    
+        // returns the associated object
+        return $this->sysfonte;
     }
     
   

@@ -3,7 +3,7 @@
  * SystemFornecedorList Listing
  * @author  <your name here>
  */
-class SystemFornecedorList extends TPage
+class SystemFornecedorList extends TWindow
 {
     protected $form;     // registration form
     protected $datagrid; // listing
@@ -19,6 +19,11 @@ class SystemFornecedorList extends TPage
     public function __construct()
     {
         parent::__construct();
+        parent::__construct();
+        parent::setSize(0.7, null);
+        parent::removePadding();
+        //parent::removeTitleBar();
+        parent::disableEscape();
         
         $this->setDatabase('sistema');            // defines the database
         $this->setActiveRecord('SystemFornecedor');   // defines the active record

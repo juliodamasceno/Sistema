@@ -1,9 +1,9 @@
 <?php
 /**
- * SystemFornecedorList Listing
+ * SysfonteList Listing
  * @author  <your name here>
  */
-class SysFornecedorList extends TPage
+class SysfonteList extends TPage
 {
     protected $form;     // registration form
     protected $datagrid; // listing
@@ -21,40 +21,37 @@ class SysFornecedorList extends TPage
         parent::__construct();
         
         $this->setDatabase('sistema');            // defines the database
-        $this->setActiveRecord('SystemFornecedor');   // defines the active record
-        // $this->setDefaultOrder('idfornecedor', 'asc');         // defines the default order
+        $this->setActiveRecord('Sysfonte');   // defines the active record
+        $this->setDefaultOrder('idfonte', 'asc');         // defines the default order
         $this->setLimit(10);
         // $this->setCriteria($criteria) // define a standard filter
 
-        //$this->addFilterField('idfornecedor', 'like', 'idfornecedor'); // filterField, operator, formField
-        $this->addFilterField('cnpj', 'like', 'cnpj'); // filterField, operator, formField
-        $this->addFilterField('fornecedor', 'like', 'fornecedor'); // filterField, operator, formField
-       
+        $this->addFilterField('idfonte', 'like', 'idfonte'); // filterField, operator, formField
+        $this->addFilterField('fonte', 'like', 'fonte'); // filterField, operator, formField
+        $this->addFilterField('fontedec', 'like', 'fontedec'); // filterField, operator, formField
+        
         // creates the form
-        $this->form = new BootstrapFormBuilder('form_search_SystemFornecedor');
-        $this->form->setFormTitle('Lista de Fornecedores : ');
+        $this->form = new BootstrapFormBuilder('form_search_Sysfonte');
+        $this->form->setFormTitle('Listagem de Fonte');
         
 
         // create the form fields
-        $codigo = new TEntry('idfornecedor');
-        $cnpj = new TEntry('cnpj');
-        $fornecedor = new TEntry('fornecedor');
-       
+        $idfonte = new TEntry('idfonte');
+        $fonte = new TEntry('fonte');
+        $fontedec = new TEntry('fontedec');
 
 
         // add the fields
-        // $this->form->addFields( [ new TLabel('Codigo') ], [ $codigo ] );
-        $this->form->addFields( [ new TLabel('Fornecedor') ], [ $fornecedor ] );
-        $this->form->addFields( [ new TLabel('CNPJ') ], [ $cnpj ] );
-        
-       
+        $this->form->addFields( [ new TLabel('Código') ], [ $idfonte ] );
+        $this->form->addFields( [ new TLabel('Fonte') ], [ $fonte ] );
+        $this->form->addFields( [ new TLabel('Descrição da Fonte') ], [ $fontedec ] );
 
 
         // set sizes
-        $codigo->setSize('100%');
-        $cnpj->setSize('100%');
-        $fornecedor->setSize('100%');
-      
+        $idfonte->setSize('100%');
+        $fonte->setSize('100%');
+        $fontedec->setSize('100%');
+
         
         // keep the form filled during navigation with session data
         $this->form->setData( TSession::getValue(__CLASS__.'_filter_data') );
@@ -62,7 +59,7 @@ class SysFornecedorList extends TPage
         // add the search form actions
         $btn = $this->form->addAction(_t('Find'), new TAction([$this, 'onSearch']), 'fa:search');
         $btn->class = 'btn btn-sm btn-primary';
-        $this->form->addActionLink(_t('New'), new TAction(['FornecedorForm', 'onEdit']), 'fa:plus green');
+        $this->form->addActionLink(_t('New'), new TAction(['SysfonteForm', 'onEdit']), 'fa:plus green');
         
         // creates a Datagrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
@@ -72,28 +69,19 @@ class SysFornecedorList extends TPage
         
 
         // creates the datagrid columns
-        $column_codigo = new TDataGridColumn('idfornecedor', 'Codigo', 'right');
-        $column_cnpj = new TDataGridColumn('cnpj', 'CNPJ', 'left');
-        $column_fornecedor = new TDataGridColumn('fornecedor', 'Fornecedor', 'left');
-        $column_email = new TDataGridColumn('email', 'Email', 'left');
-        $column_telefone = new TDataGridColumn('telefone', 'Telefone', 'left');
-        $column_ativo = new TDataGridColumn('ativo', 'Ativo', 'left');
-        $column_tipo = new TDataGridColumn('tipo', 'Tipo', 'left');
-        $column_datacadastro = new TDataGridColumn('datacadastro', 'Cadastro', 'left');
-        $column_datacadastro->setTransformer(array($this, 'formatDate'));
+        $column_idfonte = new TDataGridColumn('idfonte', 'Código', 'right');
+        $column_fonte = new TDataGridColumn('fonte', 'Fonte', 'left');
+        $column_fontedec = new TDataGridColumn('fontedec', 'Descrição da Fonte', 'left');
+
+
         // add the columns to the DataGrid
-        $this->datagrid->addColumn($column_codigo);
-        $this->datagrid->addColumn($column_cnpj);
-        $this->datagrid->addColumn($column_fornecedor);
-        $this->datagrid->addColumn($column_email);
-        $this->datagrid->addColumn($column_telefone);
-        $this->datagrid->addColumn($column_ativo);
-        $this->datagrid->addColumn($column_tipo);
-        $this->datagrid->addColumn($column_datacadastro);
+        $this->datagrid->addColumn($column_idfonte);
+        $this->datagrid->addColumn($column_fonte);
+        $this->datagrid->addColumn($column_fontedec);
 
         
-        $action1 = new TDataGridAction(['FornecedorForm', 'onEdit'], ['idfornecedor'=>'{idfornecedor}']);
-        $action2 = new TDataGridAction([$this, 'onDelete'], ['idfornecedor'=>'{idfornecedor}']);
+        $action1 = new TDataGridAction(['SysfonteForm', 'onEdit'], ['idfonte'=>'{idfonte}']);
+        $action2 = new TDataGridAction([$this, 'onDelete'], ['idfonte'=>'{idfonte}']);
         
         $this->datagrid->addAction($action1, _t('Edit'),   'far:edit blue');
         $this->datagrid->addAction($action2 ,_t('Delete'), 'far:trash-alt red');
@@ -125,11 +113,5 @@ class SysFornecedorList extends TPage
         $container->add($panel);
         
         parent::add($container);
-    }
-    
-    public function formatDate($date, $object)
-    {
-        $dt = new DateTime($date);
-        return $dt->format('d/m/Y');
     }
 }

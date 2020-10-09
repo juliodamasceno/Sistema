@@ -1,12 +1,12 @@
 <?php
 /**
- * SysEquipamento Active Record
+ * Sysfonte Active Record
  * @author  <your-name-here>
  */
-class SysEquipamento extends TRecord
+class Sysfonte extends TRecord
 {
-    const TABLENAME = 'sysequipamento';
-    const PRIMARYKEY= 'idequipamento';
+    const TABLENAME = 'sysfonte';
+    const PRIMARYKEY= 'idfonte';
     const IDPOLICY =  'max'; // {max, serial}
     
     
@@ -16,8 +16,8 @@ class SysEquipamento extends TRecord
     public function __construct($id = NULL, $callObjectLoad = TRUE)
     {
         parent::__construct($id, $callObjectLoad);
-        parent::addAttribute('nomeequipamento');
-        parent::addAttribute('sigla');
+        parent::addAttribute('fonte');
+        parent::addAttribute('fontedec');
     }
 
 

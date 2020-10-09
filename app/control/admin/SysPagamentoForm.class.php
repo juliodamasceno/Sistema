@@ -27,7 +27,7 @@ class SysPagamentoForm extends TPage
         parent::__construct();
         //parent::setSize(0.8, null);
         //parent::removePadding();
-        // parent::removeTitleBar();
+        //parent::removeTitleBar();
         //parent::disableEscape();
         
         // creates the form

@@ -1,5 +1,5 @@
 <?php
-class TesteForm extends TPage
+class TesteForm extends TWindow
 {
    
     private $form;

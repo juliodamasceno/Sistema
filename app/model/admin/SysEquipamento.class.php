@@ -5,8 +5,8 @@
  */
 class SysEquipamento extends TRecord
 {
-    const TABLENAME = 'sys_equipamento';
-    const PRIMARYKEY= 'idequipamentoq';
+    const TABLENAME = 'sysequipamento';
+    const PRIMARYKEY= 'idequipamento';
     const IDPOLICY =  'max'; // {max, serial}
     
     

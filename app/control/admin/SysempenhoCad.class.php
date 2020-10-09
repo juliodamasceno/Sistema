@@ -29,21 +29,25 @@ class SysempenhoCad extends TPage
         $dataemp = new TDate('dataemp');
         $procorigem = new TEntry('procorigem');
         
-        $equipamento = new TDBUniqueSearch('equipamento', 'sistema', 'SysEquipamento', 'idequipamentoq', 'nomeequipamento');
+        $equipamento = new TDBUniqueSearch('idequipamento', 'sistema', 'SysEquipamento', 'idequipamento', 'nomeequipamento');
         $equipamento->setMinLength(1);
-        $equipamento->setMask('({idempenho}) {numempenho}');
+        $equipamento->setMask('{idequipamento}, {sigla}');
         
-        //$equipamento = new TCombo('equipamento', 'sistema', 'Sysempenho', 'sys_equipamento->sigla', 'idequipamentoq');
-
-
+        $fonte = new TDBUniqueSearch('idfonte', 'sistema', 'SysFonte', 'idfonte', 'fonte');
+        $fonte->setMinLength(1);
+        $fonte->setMask('{idfonte}, {fontedec} - {fonte}');
+        
+        
         // add the fields
         $this->form->addFields( [ new TLabel('Código') ], [ $idempenho ] );
-        $this->form->addFields( [ new TLabel('Númnero do empenho') ], [ $numempenho ] );
+        $this->form->addFields( [ new TLabel('Número do empenho') ], [ $numempenho ] );
         $this->form->addFields( [ new TLabel('Objeto') ], [ $objeto ] );
         $this->form->addFields( [ new TLabel('Valor em R$') ], [ $valor ] );
         $this->form->addFields( [ new TLabel('Data do empenho') ], [ $dataemp ] );
         $this->form->addFields( [ new TLabel('Processo de origem') ], [ $procorigem ] );
-        $this->form->addFields( [ new TLabel('Equipamento  atendido') ], [ $equipamento ] );
+        $this->form->addFields( [ new TLabel('Equipamento atendido') ], [ $equipamento ] );
+        $this->form->addFields( [new TLabel('Fonte de recurso') ], [$fonte]);
+
 
 
 

@@ -4,7 +4,7 @@
  *
  * @version    1.0
  * @package    samples
- * @subpackage tutor
+ * @subpackage tutor 
  * @author     Pablo Dall'Oglio
  * @copyright  Copyright (c) 2006 Adianti Solutions Ltd. (http://www.adianti.com.br)
  * @license    http://www.adianti.com.br/framework-license
@@ -28,9 +28,9 @@ class SysPagamentoForm extends TPage
         // creates the form
        
         $this->form = new BootstrapFormBuilder('form_Sale');
-        $this->form->setFormTitle('<h4>Cadastro de Pagamentos</h4>');
+        $this->form->setFormTitle('<h4>Cadastro de Pagamentos xyz</h4>');
         $this->form->setProperty('style', 'margin:0;border:0');
-        $this->form->setClientValidation(true);
+        $this->form->setClientValidation(true); 
         
         // master fields
         $id          = new TEntry('id');
@@ -148,7 +148,7 @@ class SysPagamentoForm extends TPage
         $col_id->setVisibility(false);
         $col_uniq->setVisibility(false);
         
-        $ = new TLabel('');
+
         // creates two datagrid actions
         $action1 = new TDataGridAction([$this, 'onEditItemProduto'] );
         $action1->setFields( ['uniqid', '*'] );

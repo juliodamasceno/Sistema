@@ -33,7 +33,7 @@ class SysempenhoSelectionList extends TPage
         
         // creates the form
         $this->form = new BootstrapFormBuilder('form_search_Sysempenho');
-        $this->form->setFormTitle('Sysempenho');
+        $this->form->setFormTitle('Localizar empenho');
         
 
         // create the form fields
@@ -43,9 +43,9 @@ class SysempenhoSelectionList extends TPage
         $valor = new TEntry('valor');
         $dataemp = new TEntry('dataemp');
         $procorigem = new TEntry('procorigem');
-         $equipamento = new TDBUniqueSearch('equipamento', 'sistema', 'SysEquipamento', 'idequipamentoq', 'nomeequipamento');
+         $equipamento = new TDBUniqueSearch('equipamento', 'sistema', 'SysEquipamento', 'idequipamento', 'nomeequipamento');
         $equipamento->setMinLength(1);
-        $equipamento->setMask('({idequipamentoq}) {nomeequipamento}');
+        $equipamento->setMask('({idequipamento}) {sigla}');
         //$equipamento = new TCombo('equipamento', 'sistema', 'SysEquipamento', 'idequipamentoq', 'nomeequipamento');
 
 
@@ -89,8 +89,8 @@ class SysempenhoSelectionList extends TPage
         $column_valor = new TDataGridColumn('valor', 'Valor', 'right');
         $column_dataemp = new TDataGridColumn('dataemp', 'Dataemp', 'left');
         $column_procorigem = new TDataGridColumn('procorigem', 'Procorigem', 'left');
-        $column_equipamento = new TDataGridColumn('equipamento', 'Equipamento', 'right');
-
+        $column_equipamento = new TDataGridColumn('sysequipamento->sigla', 'Equipamento', 'right');
+        $column_fonte = new TDataGridColumn('fonte', 'Fonte de Recurso', 'left');
 
         // add the columns to the DataGrid
         $this->datagrid->addColumn($column_idempenho);
@@ -100,6 +100,7 @@ class SysempenhoSelectionList extends TPage
         $this->datagrid->addColumn($column_dataemp);
         $this->datagrid->addColumn($column_procorigem);
         $this->datagrid->addColumn($column_equipamento);
+        $this->datagrid->addColumn($column_fonte);
 
         $column_idempenho->setTransformer([$this, 'formatRow'] );
         
